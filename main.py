@@ -24,7 +24,7 @@ def main(n, r, upper_cap):
 
     """aug_path = sap_dijkstra.sap_dijkstra(source, sink, edges, vertices)"""
 
-    """for edge in edges:
+    for edge in edges:
         print(edge)
     print("Augmenting Path: {}".format(aug_path))
 
