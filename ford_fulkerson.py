@@ -1,5 +1,6 @@
 from collections import defaultdict
-import SAP
+import dijkstra_variations
+import copy
 
 class FordFulkerson:
     def __init__(self):
@@ -17,20 +18,26 @@ class FordFulkerson:
         no_of_edges = len(edges)
 
         while True:
-            dijkstra = SAP.SAPDijkstra()
+            dijkstra = dijkstra_variations.Dijkstra()
             if dijkstra_variation == 1:
                 # Find a shortest augmenting path using SAP-Dijkstra
-                augmenting_paths = dijkstra.sap_dijkstra(source, sink, edges, list(residual_graph.keys()))
+                augmenting_paths = dijkstra.sap_dijkstra(source, sink, residual_graph, list(residual_graph.keys()))
             elif dijkstra_variation == 2:
                 # Find the augmenting path using DFS-like Dijkstra
-                augmenting_paths = dijkstra.dfs_like_dijkstra(source, sink, edges, list(residual_graph.keys()))
+                augmenting_paths = dijkstra.dfs_like_dijkstra(source, sink, residual_graph, list(residual_graph.keys()))
             
             elif dijkstra_variation == 3:
-                # Find the augmenting path using DFS-like Dijkstra
-                augmenting_paths = dijkstra.random_dijkstra(source, sink, edges, list(residual_graph.keys()))
+                # Find the augmenting path using MaxCap Dijkstra
+                augmenting_paths = dijkstra.maxcap_dijkstra(source, sink, residual_graph, list(residual_graph.keys()))
+            
+            elif dijkstra_variation == 4:
+                # Find the augmenting path using Random Dijkstra
+                augmenting_paths = dijkstra.random_dijkstra(source, sink, residual_graph, list(residual_graph.keys()))
                 
             if len(augmenting_paths[0]) < 2:
                 break  # No more augmenting paths, terminate the loop
+
+            #print(f"Residual Network: {residual_graph}")
             
             # Find the bottleneck capacity along the augmenting path
             bottleneck_capacity = float('inf')
@@ -52,7 +59,7 @@ class FordFulkerson:
             
             # print(edges)
             iteration = iteration + 1
-            #print(f"Iteration: {iteration}")
+            
             #print(f"Paths: {paths}")
             continue
             
@@ -66,8 +73,8 @@ class FordFulkerson:
 
         for u, v, capacity in edges:
             residual_graph[u].append((v, capacity))
-            residual_graph[v].append((u, 0))  # Initialize reverse edge with residual capacity
-
+            residual_graph[v].append((u, 0))  # Initialize reverse edge with residual capacity in graph
+        
         return residual_graph
     
     def get_capacity(self, graph, u, v):
@@ -82,8 +89,6 @@ class FordFulkerson:
         for i, (neighbor, capacity) in enumerate(graph[u]):
             if neighbor == v:
                 graph[u][i] = (neighbor, capacity - flow)
-                edges.remove((u, v, capacity))
-                edges.append((u, v, capacity - flow))
                 break
         
         # Update the reverse edge (v, u) with the residual capacity
