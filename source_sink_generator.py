@@ -47,7 +47,7 @@ class GraphGenerator:
             for edge in edges:
                 writer.writerow([edge[0], edge[1], edge[2]])
 
-        print 'Edges:', edges
+        #print 'Edges:', edges
         return source, sink, edges, vertices
 
     def bfs_longest_path(self, source, edges):
