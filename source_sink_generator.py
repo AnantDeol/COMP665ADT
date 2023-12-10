@@ -12,7 +12,9 @@ class GraphGenerator:
         vertices = range(n)
 
         # Assign random Cartesian coordinates to each node
-        coordinates = {u: [random.random(), random.random()] for u in vertices}
+        coordinates = {}
+        for u in vertices:
+            coordinates[u] = [random.random(), random.random()]
 
         # Generate edges based on Euclidean distances and assign capacities
         edges = set()
