@@ -51,10 +51,10 @@ def main(n, r, upper_cap, file_path):
 
     mean_length = total_length / paths if paths > 0 else 0
 
-    print "Paths: {}".format(paths)
-    print "Mean Length: {}".format(mean_length)
-    print "Mean Proportional Length: {}".format(mean_length / max_length if max_length > 0 else 0)
-    print "Total Edges: {}".format(no_of_edges)
+    print "Paths: %s" % paths
+    print "Mean Length: %s" % mean_length
+    print "Mean Proportional Length: %s" % (mean_length / max_length if max_length > 0 else 0)
+    print "Total Edges: %s" % no_of_edges
 
 
 if __name__ == "__main__":
