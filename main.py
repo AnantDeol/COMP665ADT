@@ -1,4 +1,5 @@
 from __future__ import division  # For enabling true division in Python 2
+from __future__ import with_statement
 
 import source_sink_generator
 import ford_fulkerson
