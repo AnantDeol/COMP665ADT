@@ -48,7 +48,6 @@ def main(n, r, upper_cap, file_path):
 
     mean_length = total_length/paths if paths > 0 else 0
 
-    print(f"Paths: {paths}")
     print("Paths: {}".format(paths))
     print("Mean Length: {}".format(mean_length))
     print("Mean Proportional Length: {}".format(mean_length/max_length if max_length > 0 else 0))
