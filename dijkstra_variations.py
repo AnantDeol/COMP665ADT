@@ -18,7 +18,7 @@ class Dijkstra:
         distances[source] = 0
 
         # Initialize the priority queue (Q) with starting vertices and distances
-       Q = deque()
+        Q = deque()
         for vertex in vertices:
             Q.append((vertex, distances[vertex]))
 
@@ -86,7 +86,7 @@ class Dijkstra:
         distances[source] = float('inf')
 
         # Initialize the priority queue (Q) with starting vertices and distances
-       Q = deque()
+        Q = deque()
         for vertex in vertices:
             Q.append((vertex, distances[vertex]))
 
@@ -112,7 +112,7 @@ class Dijkstra:
         return augmenting_paths
 
     def random_dijkstra(self, source, sink, residual_graph, vertices):
-         distances = {}
+        distances = {}
         for vertex in vertices:
             distances[vertex] = float('inf')
         predecessors = {}
