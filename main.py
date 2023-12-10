@@ -42,7 +42,7 @@ def main(n, r, upper_cap, file_path):
         graph_generator = source_sink_generator.GraphGenerator()
         source, sink, edges, vertices = graph_generator.generate_sink_source_graph(n, r, upper_cap)
 
-    print "Source: {}, Sink: {}".format(source, sink)
+    print "Source: %s, Sink: %s" % (source, sink)
 
     # Run Ford Fulkerson on the graph
     FF = ford_fulkerson.FordFulkerson()
