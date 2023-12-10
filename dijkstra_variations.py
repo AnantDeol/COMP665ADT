@@ -13,7 +13,7 @@ class Dijkstra:
         for vertex in vertices:
             distances[vertex] = float('inf')
         predecessors = {}
-        for vertex in vertices
+        for vertex in vertices:
             predecessors[vertex] = None
         distances[source] = 0
 
@@ -45,7 +45,7 @@ class Dijkstra:
         for vertex in vertices:
             distances[vertex] = float('inf')
         predecessors = {}
-        for vertex in vertices
+        for vertex in vertices:
             predecessors[vertex] = None
         counter = 1e9  # Start with a large counter value
 
@@ -81,7 +81,7 @@ class Dijkstra:
         for vertex in vertices:
             distances[vertex] = float('inf')
         predecessors = {}
-        for vertex in vertices
+        for vertex in vertices:
             predecessors[vertex] = None
         distances[source] = float('inf')
 
@@ -116,7 +116,7 @@ class Dijkstra:
         for vertex in vertices:
             distances[vertex] = float('inf')
         predecessors = {}
-        for vertex in vertices
+        for vertex in vertices:
             predecessors[vertex] = None
 
         distances[source] = 0
