@@ -7,7 +7,7 @@ import csv
 
 def main(n, r, upper_cap, file_path):
 
-    opt = "r"
+    opt = "g"
 
     if opt == "r":
         with open(file_path, 'r') as csvfile:
