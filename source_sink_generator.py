@@ -1,20 +1,19 @@
-from __future__ import with_statement, division
 import random
 import csv
 from collections import deque
+
 
 class GraphGenerator:
     def __init__(self):
         pass
 
     def generate_sink_source_graph(self, n, r, upper_cap):
+        
         # Define a set of vertices V such that |V| = n
-        vertices = range(n)
+        vertices = list(range(n))
 
         # Assign random Cartesian coordinates to each node
-        coordinates = {}
-        for u in vertices:
-            coordinates[u] = [random.random(), random.random()]
+        coordinates = {u: [random.random(), random.random()] for u in vertices}
 
         # Generate edges based on Euclidean distances and assign capacities
         edges = set()
@@ -28,7 +27,7 @@ class GraphGenerator:
                     else:
                         if (u, v) not in edges and (v, u) not in edges:
                             edges.add((v, u))
-
+        
         # Add capacity to each edge
         edges = [(u, v, random.randint(1, upper_cap)) for (u, v) in edges]
 
@@ -41,14 +40,15 @@ class GraphGenerator:
         sink = longest_path[-1]
 
         # Write the graph and capacities to a CSV file
-        with open("source_sink_graph.csv", "w") as csvfile:
+        with open("source_sink_graph.csv", "w", newline='') as csvfile:
             writer = csv.writer(csvfile)
             writer.writerow(["StartNode", "EndNode", "Capacity"])
             for edge in edges:
                 writer.writerow([edge[0], edge[1], edge[2]])
-
-        #print 'Edges:', edges
+        
+        print(f'Edges: {edges}')
         return source, sink, edges, vertices
+
 
     def bfs_longest_path(self, source, edges):
         visited = set()
