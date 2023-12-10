@@ -1,8 +1,7 @@
+from __future__ import with_statement, division
 import random
 import csv
 from collections import deque
-from __future__ import with_statement, division
-
 
 class GraphGenerator:
     def __init__(self):
