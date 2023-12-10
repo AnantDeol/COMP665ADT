@@ -8,16 +8,26 @@ class Dijkstra:
         pass
 
     def sap_dijkstra(self, source, sink, residual_graph, vertices):
-        distances = {vertex: float('inf') for vertex in vertices}
-        predecessors = {vertex: None for vertex in vertices}
+        #distances = {vertex: float('inf') for vertex in vertices}
+        distances = {}
+        for vertex in vertices:
+            distances[vertex] = float('inf')
+        predecessors = {}
+        for vertex in vertices
+            predecessors[vertex] = None
         distances[source] = 0
 
         # Initialize the priority queue (Q) with starting vertices and distances
-        Q = deque([(vertex, distances[vertex]) for vertex in vertices])
+       Q = deque()
+        for vertex in vertices:
+            Q.append((vertex, distances[vertex]))
 
         while Q:
             current_vertex, current_distance = Q.popleft()
-            neighbors = [v for v, capacity in residual_graph[current_vertex] if capacity > 0]
+            neighbors = []
+            for v, capacity in residual_graph[current_vertex]:
+                if capacity > 0:
+                    neighbors.append(v)
             for neighbor in neighbors:
                 if distances[neighbor] > current_distance + 1:  # Taking edge lengths as 1
                     distances[neighbor] = current_distance + 1
@@ -31,8 +41,12 @@ class Dijkstra:
         return augmenting_paths
 
     def dfs_like_dijkstra(self, source, sink, residual_graph, vertices):
-        distances = {vertex: float('inf') for vertex in vertices}
-        predecessors = {vertex: None for vertex in vertices}
+        distances = {}
+        for vertex in vertices:
+            distances[vertex] = float('inf')
+        predecessors = {}
+        for vertex in vertices
+            predecessors[vertex] = None
         counter = 1e9  # Start with a large counter value
 
         distances[source] = 0
@@ -44,7 +58,10 @@ class Dijkstra:
         while Q:
             current_distance, current_vertex = heapq.heappop(Q)
 
-            neighbors = [v for v, capacity in residual_graph[current_vertex] if capacity > 0]
+            neighbors = []
+            for v, capacity in residual_graph[current_vertex]:
+                if capacity > 0:
+                    neighbors.append(v)
             for neighbor in neighbors:
                 if distances[neighbor] == float('inf'):
                     counter -= 1  # Decrease the key value for v from a large value to a decreasing counter value
@@ -60,17 +77,27 @@ class Dijkstra:
         return augmenting_paths
 
     def maxcap_dijkstra(self, source, sink, residual_graph, vertices):
-        distances = {vertex: float('-inf') for vertex in vertices}
-        predecessors = {vertex: None for vertex in vertices}
+        distances = {}
+        for vertex in vertices:
+            distances[vertex] = float('inf')
+        predecessors = {}
+        for vertex in vertices
+            predecessors[vertex] = None
         distances[source] = float('inf')
 
         # Initialize the priority queue (Q) with starting vertices and distances
-        Q = deque([(vertex, distances[vertex]) for vertex in vertices])
+       Q = deque()
+        for vertex in vertices:
+            Q.append((vertex, distances[vertex]))
 
         while Q:
             current_vertex, current_distance = Q.popleft()
 
-            neighbors = [(v, capacity) for v, capacity in residual_graph[current_vertex] if capacity > 0]
+            neighbors = []
+            for v, capacity in residual_graph[current_vertex]:
+                if capacity > 0:
+                    neighbors.append((v, capacity))
+
             for neighbor, capacity in neighbors:
                 if min(distances[current_vertex], capacity) > distances[neighbor]:
                     distances[neighbor] = min(distances[current_vertex], capacity)
@@ -85,8 +112,12 @@ class Dijkstra:
         return augmenting_paths
 
     def random_dijkstra(self, source, sink, residual_graph, vertices):
-        distances = {vertex: float('inf') for vertex in vertices}
-        predecessors = {vertex: None for vertex in vertices}
+         distances = {}
+        for vertex in vertices:
+            distances[vertex] = float('inf')
+        predecessors = {}
+        for vertex in vertices
+            predecessors[vertex] = None
 
         distances[source] = 0
 
@@ -97,7 +128,11 @@ class Dijkstra:
         while Q:
             current_distance, current_vertex = heapq.heappop(Q)
 
-            neighbors = [v for v, capacity in residual_graph[current_vertex] if capacity > 0]
+            neighbors = []
+            for v, capacity in residual_graph[current_vertex]:
+                if capacity > 0:
+                    neighbors.append(v)
+
             for neighbor in neighbors:
                 if distances[neighbor] == float('inf'):
                     distances[neighbor] = random.randint(1, 1000000)
