@@ -130,7 +130,7 @@ if __name__ == "__main__":
             
             except Exception as e:
                 #Handle other exceptions if needed
-                print(f"An error occurred: {e}")
+                print("An error occurred: {}".format(e))
         
             main(None, None, None, file_path) # Call the main function
             break
