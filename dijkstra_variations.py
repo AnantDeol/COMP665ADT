@@ -26,11 +26,10 @@ class Dijkstra:
         
         augmenting_paths = self.reconstruct_path(predecessors, sink)  
     
-        for i in augmenting_paths:
-            print (i)
         return augmenting_paths
     
     def dfs_like_dijkstra(self, source, sink, residual_graph, vertices):
+
         distances = {vertex: float('inf') for vertex in vertices}
         predecessors = {vertex: None for vertex in vertices}
         counter = 1e9  # Start with a large counter value
@@ -56,11 +55,10 @@ class Dijkstra:
 
         augmenting_paths = self.reconstruct_path(predecessors, sink)
 
-        #print(f"Augmenting Path: {augmenting_paths}")
-        #print(f"Visited: {visited}")
         return augmenting_paths
     
     def maxcap_dijkstra(self, source, sink, residual_graph, vertices):
+
         distances = {vertex: float('-inf') for vertex in vertices}
         predecessors = {vertex: None for vertex in vertices}
         distances[source] = float('inf')
@@ -81,11 +79,10 @@ class Dijkstra:
         augmenting_paths = self.reconstruct_path(predecessors, sink)
         max_capacity = distances[sink]
         
-        #print(f"Augmenting Path: {augmenting_paths}")
-        #print(f"Max Cap: {max_capacity}")
         return augmenting_paths
     
     def random_dijkstra(self, source, sink, residual_graph, vertices):
+        
         distances = {vertex: float('inf') for vertex in vertices}
         predecessors = {vertex: None for vertex in vertices}
 
@@ -117,10 +114,7 @@ class Dijkstra:
     def reconstruct_path(self, predecessors, sink):
         path = []
         current = sink
-        #print("Started reconstruction")
         while current is not None:
-            #print(f"current: {current}")
             path.insert(0, current) # Tracing from sink to back, adding new element on left of list
             current = predecessors[current]
-            #print(f"Predecessor: {current}")
         return [path]
