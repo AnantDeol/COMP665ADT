@@ -124,7 +124,8 @@ if __name__ == "__main__":
                 if os.path.exists(file_path):
                     pass
                 else:
-                    print(f"Error: File path '{file_path}' does not exist.")
+                    print("Error: File path '{}' does not exist.".format(file_path))
+
                     continue
             
             except Exception as e:
