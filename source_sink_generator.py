@@ -40,9 +40,10 @@ class GraphGenerator:
         sink = longest_path[-1]
 
         # Write the graph and capacities to a CSV file
-        with open("source_sink_graph.csv", "w", newline='') as csvfile:
+        filename = "graph_n{}_r{}_upperCap{}.csv".format(n, r, upper_cap)
+        with open(filename, "w", newline='') as csvfile:
             writer = csv.writer(csvfile)
-            writer.writerow(["StartNode", "EndNode", "Capacity"])
+            writer.writerow([n, r, upper_cap, source, sink])
             for edge in edges:
                 writer.writerow([edge[0], edge[1], edge[2]])
         
