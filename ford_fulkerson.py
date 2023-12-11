@@ -1,24 +1,25 @@
 from collections import defaultdict
 import dijkstra_variations
-import copy
+
 
 class FordFulkerson:
     def __init__(self):
         pass
 
     def ford_fulkerson(self, source, sink, edges, dijkstra_variation):
+
         # Create a residual graph with capacities initialized to the original capacities
         residual_graph = self.initialize_residual_graph(edges)
-        # print(edges)
+
         # Initialize metrics
         paths = 0
+        flow = 0
         total_length = 0
         max_length = 0
-        iteration = 0
         no_of_edges = len(edges)
 
         while True:
-            dijkstra = dijkstra_variations.Dijkstra()
+            dijkstra = dijkstra_variations.Dijkstra()   
             if dijkstra_variation == 1:
                 # Find a shortest augmenting path using SAP-Dijkstra
                 augmenting_paths = dijkstra.sap_dijkstra(source, sink, residual_graph, list(residual_graph.keys()))
@@ -37,7 +38,6 @@ class FordFulkerson:
             if len(augmenting_paths[0]) < 2:
                 break  # No more augmenting paths, terminate the loop
 
-            #print(f"Residual Network: {residual_graph}")
             
             # Find the bottleneck capacity along the augmenting path
             bottleneck_capacity = float('inf')
@@ -52,22 +52,19 @@ class FordFulkerson:
             
             
             # Update metrics
+            flow += bottleneck_capacity
             paths += 1
             total_length += len(augmenting_paths[0]) - 1
             max_length = max(max_length, len(augmenting_paths[0]) - 1)
-
             
-            # print(edges)
-            iteration = iteration + 1
-            
-            #print(f"Paths: {paths}")
             continue
-            
-        return residual_graph, paths, total_length, max_length, no_of_edges
+
+        return residual_graph, paths, total_length, max_length, no_of_edges, flow
 
 
 
     def initialize_residual_graph(self, edges):
+
         # Create a defaultdict to represent the residual graph
         residual_graph = defaultdict(list)
 
@@ -78,6 +75,7 @@ class FordFulkerson:
         return residual_graph
     
     def get_capacity(self, graph, u, v):
+
         # Helper function to get the capacity of the edge (u, v) in the graph
         for neighbor, capacity in graph[u]:
             if neighbor == v:
@@ -85,6 +83,7 @@ class FordFulkerson:
         return 0
     
     def update_capacity(self, graph, edges, u, v, flow):
+
         # Helper function to update the capacity of the edge (u, v) in the graph
         for i, (neighbor, capacity) in enumerate(graph[u]):
             if neighbor == v:
